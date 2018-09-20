@@ -1,4 +1,5 @@
 # Ellipsis
+ -- ./setup.sh unzip the training data
 
  -- ./go.sh  for train the data
 
