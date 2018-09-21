@@ -214,9 +214,11 @@ def generate_ellipsis_sentences(sentences,replace,doc):
 
     out = []
     for i,word in enumerate(output):
-        if i-1 in add_item:
-            out.append("*"+"".join(add_item[i-1]))
+        if i in add_item:
+            out.append("*"+"".join(add_item[i]))
         out.append(word)
+    if -1 in add_item:
+        out.append("*"+"".join(add_item[-1]))
     return out
     
 
@@ -227,7 +229,7 @@ if __name__ == "__main__":
     read_f.close()
 
     doc = Doc()
-    sentences = [["我","喜欢","吃","苹果","。"],["很","好吃","。"]]
+    sentences = [["我","是","一个","男孩","。"],["特别","爱吃","苹果","。"]]
     generate_vec(doc,sentences)
 
     best_model = torch.load("./model/model") 
