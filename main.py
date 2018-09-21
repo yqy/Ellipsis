@@ -216,7 +216,7 @@ def generate_ellipsis_sentences(sentences,replace,doc):
     for i,word in enumerate(output):
         if i-1 in add_item:
             out.append("*"+"".join(add_item[i-1]))
-            out.append(word)
+        out.append(word)
     return out
     
 
@@ -230,7 +230,11 @@ if __name__ == "__main__":
     sentences = [["我","喜欢","吃","苹果","。"],["很","好吃","。"]]
     generate_vec(doc,sentences)
 
-    model = torch.load("./model/model") 
+    best_model = torch.load("./model/model") 
+
+    model = Network(nnargs["embedding_size"],nnargs["embedding_dimention"],embedding,nnargs["hidden_dimention"]).cuda()
+
+    utils.net_copy(model,best_model)
 
     start,end,zp_indexs,np_indexs,np_pair_score,pair_score,zp_score,np_score,zp_x_score = model.forward(doc,dropout=nnargs["dropout"],zp_lamda=0.2,np_lamda=0.2)
 
